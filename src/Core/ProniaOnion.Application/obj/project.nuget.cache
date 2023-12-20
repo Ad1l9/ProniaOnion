@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "y8vXQNHA+p/ZDsCqRVkNln7BXtjUCfPHoWXyZEz81YtyVzIl3vimw3hhU0/1l6WXG9tH2NPZtz2roZs8Ij4I4Q==",
+  "dgSpecHash": "g2G8yzqhUhTJbznY5qf/K6MRvMADd739HpakC2Op9+yTkYfK5l5guLrS1YbeHOfz0iitCJXtRpu0EEISFQ1IpQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\user\\Desktop\\ProniaOnion\\src\\Core\\ProniaOnion.Application\\ProniaOnion.Application.csproj",
+  "projectFilePath": "C:\\Users\\user\\Desktop\\Code\\week9-13\\ProniaOnion\\src\\Core\\ProniaOnion.Application\\ProniaOnion.Application.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

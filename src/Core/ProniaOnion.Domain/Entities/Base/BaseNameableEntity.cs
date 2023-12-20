@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace ProniaOnion.Domain.Entities.Base
 {
-    internal class BaseNameableEntity
+    public class BaseNameableEntity:BaseEntity
     {
+        public string Name { get; set; } = null!;
     }
 }

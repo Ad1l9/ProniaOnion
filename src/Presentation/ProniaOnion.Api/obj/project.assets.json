@@ -442,11 +442,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\user\\Desktop\\ProniaOnion\\src\\Presentation\\ProniaOnion.Api\\ProniaOnion.Api.csproj",
+      "projectUniqueName": "C:\\Users\\user\\Desktop\\Code\\week9-13\\ProniaOnion\\src\\Presentation\\ProniaOnion.Api\\ProniaOnion.Api.csproj",
       "projectName": "ProniaOnion.Api",
-      "projectPath": "C:\\Users\\user\\Desktop\\ProniaOnion\\src\\Presentation\\ProniaOnion.Api\\ProniaOnion.Api.csproj",
+      "projectPath": "C:\\Users\\user\\Desktop\\Code\\week9-13\\ProniaOnion\\src\\Presentation\\ProniaOnion.Api\\ProniaOnion.Api.csproj",
       "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\user\\Desktop\\ProniaOnion\\src\\Presentation\\ProniaOnion.Api\\obj\\",
+      "outputPath": "C:\\Users\\user\\Desktop\\Code\\week9-13\\ProniaOnion\\src\\Presentation\\ProniaOnion.Api\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace ProniaOnion.Domain.Entities
 {
-    internal class ProductColor
+    public class ProductColor
     {
+        //Relational Prop
+
+        public int ProductId { get; set; }
+        public Product Product { get; set; } = null!;
+        public int ColorId { get; set; }
+        public Color Color { get; set; } = null!;
     }
 }
