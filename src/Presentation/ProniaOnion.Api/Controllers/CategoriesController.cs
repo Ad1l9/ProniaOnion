@@ -46,7 +46,7 @@ namespace ProniaOnion.Api.Controllers
         {
             if (id <= 0) return StatusCode(StatusCodes.Status400BadRequest);
 
-            await _service.UpdateAsync(id, new(name) );
+            await _service.UpdateAsync(id, new(name) ); 
 
             return NoContent();
         }
