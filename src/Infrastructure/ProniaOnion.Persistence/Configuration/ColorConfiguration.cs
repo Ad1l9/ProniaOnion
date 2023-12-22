@@ -4,7 +4,7 @@ using ProniaOnion.Domain.Entities;
 
 namespace ProniaOnion.Persistence.Configuration
 {
-    public class ColorConfiguration:IEntityTypeConfiguration<Color>
+    internal class ColorConfiguration:IEntityTypeConfiguration<Color>
     {
 
         public void Configure(EntityTypeBuilder<Color> builder)

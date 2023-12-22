@@ -99,5 +99,11 @@ namespace ProniaOnion.Persistence.Implementations.Repositories.Generic
         {
             await _context.SaveChangesAsync();
         }
+
+        public void SoftDelete(T entity)
+        {
+            entity.IsDeleted = true;
+            _table.Update(entity);
+        }
     }
 }

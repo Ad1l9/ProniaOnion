@@ -66,5 +66,13 @@ namespace ProniaOnion.Persistence.Implementations.Services
             _repository.Delete(category);
             await _repository.SaveChangesAsync();
         }
+
+        public async Task SoftDeleteAsync(int id)
+        {
+            Category category = await _repository.GetByIdAsync(id);
+            if (category is null) throw new Exception("Not found");
+            _repository.SoftDelete(category);
+            await _repository.SaveChangesAsync();
+        }
     }
 }

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ProniaOnion.Persistence.Configuration
 {
-    public class ProductConfiguration : IEntityTypeConfiguration<Product>
+    internal class ProductConfiguration : IEntityTypeConfiguration<Product>
     {
         public void Configure(EntityTypeBuilder<Product> builder)
         {

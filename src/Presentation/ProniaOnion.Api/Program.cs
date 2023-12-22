@@ -1,4 +1,8 @@
+using FluentValidation.AspNetCore;
+using ProniaOnion.Application.Dtos.Category;
+using ProniaOnion.Application.Validators;
 using ProniaOnion.Persistence.ServiceRegistration;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +14,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddPersistenceService(builder.Configuration);
 builder.Services.AddApplicationService();
+
+//builder.Services.AddControllers().AddFluentValidation(c=>c.RegisterValidatorsFromAssemblyContaining<CategoryCreateDtoValidator>());
 
 var app = builder.Build();
 
