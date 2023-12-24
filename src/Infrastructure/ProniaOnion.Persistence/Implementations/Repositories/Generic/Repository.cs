@@ -8,6 +8,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace ProniaOnion.Persistence.Implementations.Repositories.Generic
 {
@@ -28,9 +29,14 @@ namespace ProniaOnion.Persistence.Implementations.Repositories.Generic
             await _table.AddAsync(entity);
         }
 
-        public void Delete(T entity)
+
+        public Task<IQueryable<T>> GetAll(bool isTracking = true, bool ignoreQuery = false, params string[] includes)
         {
-            _table.Remove(entity);
+            IQueryable<T> query = _table;
+            query = _AddIncludes(query, includes);
+            if (!ignoreQuery) query = query.IgnoreQueryFilters();
+
+            return (Task<IQueryable<T>>)(isTracking ? query : query.AsNoTracking());
         }
 
         public IQueryable<T> GetAllAsync(
@@ -68,12 +74,84 @@ namespace ProniaOnion.Persistence.Implementations.Repositories.Generic
             Expression<Func<T, bool>>? expression = null,
             params string[] includes)
         {
-            var query = _table.AsQueryable();
+            var query =  _table.AsQueryable();
 
 
             if (expression is not null) query = query.Where(expression);
 
 
+            query = _AddIncludes(query,includes);
+            return query;
+        }
+
+
+        public async Task<T> GetByIdAsync(int id, bool isTracking = true, bool ignoreQuery = false, params string[] includes)
+        {
+            IQueryable<T> query = _table.Where(q=>q.Id==id);
+
+            query = _AddIncludes(query,includes);
+
+            if (!isTracking) query = query.AsNoTracking();
+            if (ignoreQuery) query = query.IgnoreQueryFilters();
+
+            return await query.FirstOrDefaultAsync();
+        }
+
+
+        public async Task<T> GetByExpressionAsync(Expression<Func<T,bool>> expression, bool isTracking = true, bool ignoreQuery = false, params string[] includes)
+        {
+            IQueryable<T> query = _table.Where(expression);
+
+            query = _AddIncludes(query, includes);
+
+            if (!isTracking) query = query.AsNoTracking();
+            if (ignoreQuery) query = query.IgnoreQueryFilters();
+
+            return await query.FirstOrDefaultAsync();
+        }
+
+
+        public void Update(T entity)
+        {
+            _table.Update(entity);
+        }
+
+
+
+        //Remove
+        public void Delete(T entity)
+        {
+            _table.Remove(entity);
+        }
+        public void SoftDelete(T entity)
+        {
+            entity.IgnoreQuery = true;
+            _table.Update(entity);
+        }
+
+        public void ReverseSoftDelete(T entity)
+        {
+            entity.IgnoreQuery = false;
+        }
+
+        
+
+
+
+        public Task<bool> IsExistAsync(Expression<Func<T,bool>> expression, bool ignoreQuery = false)
+        {
+            return ignoreQuery ? _table.AnyAsync(expression) : _table.IgnoreQueryFilters().AnyAsync(expression);
+        }
+
+
+
+        public async Task SaveChangesAsync()
+        {
+            await _context.SaveChangesAsync();
+        }
+
+        private IQueryable<T> _AddIncludes(IQueryable<T> query, params string[] includes)
+        {
             if (includes is not null)
             {
                 for (int i = 0; i < includes.Length; i++)
@@ -82,28 +160,6 @@ namespace ProniaOnion.Persistence.Implementations.Repositories.Generic
                 }
             }
             return query;
-        }
-
-        public async Task<T> GetByIdAsync(int id)
-        {
-            T entity = await _table.FirstOrDefaultAsync(c => c.Id == id);
-
-            return entity;
-        }
-        public void Update(T entity)
-        {
-            _table.Update(entity);
-        }
-
-        public async Task SaveChangesAsync()
-        {
-            await _context.SaveChangesAsync();
-        }
-
-        public void SoftDelete(T entity)
-        {
-            entity.IsDeleted = true;
-            _table.Update(entity);
-        }
+        } 
     }
 }
