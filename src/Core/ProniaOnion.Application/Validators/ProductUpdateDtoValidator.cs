@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace ProniaOnion.Application.Validators
 {
-    public class ProductCreateDtoValidator:AbstractValidator<CreateProductDto>
+    public class ProductUpdateDtoValidator:AbstractValidator<UpdateProductDto>
     {
-        public ProductCreateDtoValidator()
+        public ProductUpdateDtoValidator()
         {
             RuleFor(x => x.Name)
                 .NotEmpty().WithMessage("Name is important")
@@ -19,15 +19,14 @@ namespace ProniaOnion.Application.Validators
 
             RuleFor(x => x.SKU).NotEmpty().MaximumLength(10).WithMessage("Name may contain maximum 10 character");
 
-            RuleFor(x => x.Price).NotEmpty().Must(x=>x>10 && x<999999.99m);
+            RuleFor(x => x.Price).NotEmpty().Must(x => x > 10 && x < 999999.99m);
 
             RuleFor(x => x.Description).MaximumLength(1000);
             RuleFor(x => x.CategoryId).Must(c => c > 0);
 
-            RuleForEach(x=>x.ColorIds).Must(c => c > 0);
+            RuleForEach(x => x.ColorIds).Must(c => c > 0);
 
             RuleFor(x => x.ColorIds).NotNull();
         }
-
     }
 }

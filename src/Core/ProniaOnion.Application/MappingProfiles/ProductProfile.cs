@@ -16,6 +16,7 @@ namespace ProniaOnion.Application.MappingProfiles
             CreateMap<Product, ProductItemDto>().ReverseMap();
             CreateMap<Product, GetProductDto>().ReverseMap();
             CreateMap<CreateProductDto, Product>();
+            CreateMap<UpdateProductDto, Product>();
         }
     }
 }
